@@ -35,16 +35,31 @@ public class Main {
     int h = input.nextInt();
     System.out.println("Enter number of neutral players: ");
     int n = input.nextInt();
+    while (n > w * h) {
+      System.out.println("Too many players, please enter a number up to " + w * h);
+      n = input.nextInt();
+    }
     System.out.println("Enter number of greedy players: ");
     int g = input.nextInt();
+    while (g > w * h - n) {
+      System.out.println("Too many players, please enter a number up to " + (w * h - n));
+      g = input.nextInt();
+    }
     System.out.println("Enter number of cooperative players: ");
     int c = input.nextInt();
+    while (c > w * h - (n + g)) {
+      System.out.println("Too many players, please enter a number up to " + (w * h - n - g));
+      c = input.nextInt();
+    }
     System.out.println("Players' strategies evolve according to points gained, true or false?");
     boolean adapt = input.nextBoolean();
     System.out.println("All tiles start with the same amount of points, true or false?");
     boolean egalitarian = input.nextBoolean();
-    System.out.println("Add TitForTat, Joss and Friedman, true or false?");
-    boolean classic = input.nextBoolean();
+    boolean classic = false;
+    if (w * h - (n + g + c) >= 3) {
+      System.out.println("Add TitForTat, Joss and Friedman, true or false?");
+      classic = input.nextBoolean();
+    }
     input.close();
 
     // Init game world
